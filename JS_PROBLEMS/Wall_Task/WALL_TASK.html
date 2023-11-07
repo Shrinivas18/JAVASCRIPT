@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .error {
+      border: 2px solid red;
+      outline: none;
+    }
+
+    #bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .containerParent {
+      margin: 20px 0;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    .leftPersonImage,
+    .rightPersonImage {
+      width: 150px;
+      height: 100px;
+    }
+
+    .rightPersonImage {
+      transform: scaleX(-1);
+    }
+
+    .displayBlock {
+      display: block;
+    }
+
+    .displayNone {
+      display: none;
+    }
+  </style>
+
+  <body>
+    <input type="number" id="numberOfWalls" placeholder="Enter Number of Walls" onchange="setNumberOfWalls()">
+    <input type="text" id="wallsHeight" placeholder="Enter Walls Height" onchange="setWallsHeight()">
+
+    <div class="containerParent">
+      <div class="container">
+        <div id="leftPersonImage" class="displayNone">
+          <img class="leftPersonImage" src="https://svgsilh.com/svg/151791.svg" alt="">
+        </div>
+
+        <div id="bar"></div>
+
+        <div id="rightPersonImage" class="displayNone">
+          <img class="rightPersonImage" src="https://svgsilh.com/svg/151791.svg" alt="">
+        </div>
+      </div>
+
+      <h4 id="leftPerson"></h4>
+      <h4 id="rightPerson"></h4>
+    </div>
+  </body>
+</html>
+
+<script>
+
+  function setWallsHeight() {
+    const userInputNumberOfWalls = document.getElementById("numberOfWalls").value;
+    const userInputWallsHeight = document.getElementById("wallsHeight").value;
+    const wallsHeight = document.getElementById("wallsHeight");
+
+    if (userInputNumberOfWalls * 2 - 1 !== userInputWallsHeight.length) {
+      wallsHeight.classList.add("error");
+    } else {
+      wallsHeight.classList.remove("error");
+      LeftToRight(userInputWallsHeight);
+      RightToLeft(userInputWallsHeight);
+      generateBars(userInputWallsHeight);
+    }
+  }
+
+  function LeftToRight(value) {
+    const arr = value.split("#").map(Number);
+    console.log(arr, "arr left to right");
+
+    let count = 1,
+      maximum = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] > maximum) {
+        maximum = arr[i];
+        count++;
+      }
+    }
+    document.getElementById("leftPerson").innerText = `Walls Visible from person on Left = ${count}`;
+  }
+
+  function RightToLeft(value) {
+    const arr = value.split("#").map(Number);
+    console.log(arr, "arr right to left");
+
+    let count = 1,
+      maximum = arr[arr.length - 1];
+    for (let i = arr.length - 2; i >= 0; i--) {
+      if (arr[i] > maximum) {
+        maximum = arr[i];
+        count++;
+      }
+    }
+
+    document.getElementById("rightPerson").innerText = `Walls Visible from person on Right = ${count}`;
+
+  }
+
+  function generateBars(value) {
+    const arr = value.split("#").map(Number);
+    const displayleftPersonImage = document.getElementById("leftPersonImage");
+    const displayrightPersonImage = document.getElementById("rightPersonImage");
+
+    const barContainer = document.getElementById("bar");
+    barContainer.innerHTML = null;
+    arr.forEach((e) => {
+      const div = document.createElement("div");
+
+      const bar = document.createElement("div");
+      bar.style = `height:${e * 40}px; width:20px; background-color:blue;`;
+
+      const barHeight = document.createElement("div");
+      barHeight.innerText = e;
+      div.append(bar);
+      div.append(barHeight);
+
+      barContainer.append(div);
+    });
+
+    displayleftPersonImage.classList.remove("displayNone");
+    displayrightPersonImage.classList.remove("displayNone");
+  }
+</script>
+
