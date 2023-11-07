@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<style>
+    .red {
+        background-color: red;
+
+    }
+
+    .green {
+        background-color: green;
+
+    }
+
+    .yellow {
+        background-color: yellow;
+
+    }
+</style>
+
+<body>
+    <button class="yellow" value="Yellow" onclick="changeColor('yellow')">Yellow</button>
+    <button class="red" value="Red" onclick="changeColor('red')">Red</button>
+    <button class="green" value="Green" onclick="changeColor('green')">Green</button>
+
+</body>
+
+</html>
+
+<script>
+
+    function changeColor(color) {
+        let t = document.querySelectorAll('button')
+        t.forEach((e) => {
+            e.classList.remove('red')
+            e.classList.remove('green')
+            e.classList.remove('yellow')
+            e.classList.add(color)
+        })
+    }
+</script>
