@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .red {
+      background-color: red;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .trf {
+      border: 2px solid blue;
+    }
+  </style>
+
+  <body>
+    <button class="yellow" id="colorChange">YELLOW</button>
+    <button class="red" id="colorChange">RED</button>
+    <button class="green" id="colorChange">GREEN</button>
+    <button id="trf" onclick="rotateColor()">Rotate</button>
+  </body>
+</html>
+
+<script>
+  function rotateColor() {
+    let t = document.querySelectorAll("#colorChange");
+    const colorList = [];
+   
+    t.forEach((e) => {
+      colorList.push(e.classList[0]);
+    });
+    
+    t.forEach((e, i) => {
+   
+    colorList.forEach((text) => {
+      console.log(text);
+      e.classList.remove(text);
+      });
+
+      if (i === 0) {
+        e.innerText = colorList[colorList.length - 1].toUpperCase();
+        e.classList.add(colorList[colorList.length - 1]);
+      } else {
+        e.innerText = colorList[i - 1].toUpperCase();
+
+        e.classList.add(colorList[i - 1]);
+      }
+    });
+  }
+</script>
