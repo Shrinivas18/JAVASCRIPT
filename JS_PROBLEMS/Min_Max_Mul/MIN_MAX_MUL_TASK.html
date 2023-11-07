@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MIN,MAX,MUL TASK</title>
+  </head>
+
+  <style>
+    .red {
+      background-color: red;
+      outline: none;
+    }
+
+    .green {
+      background-color: rgb(75, 210, 75);
+      outline: none;
+    }
+
+    div {
+      padding: 4px;
+    }
+    input {
+      border-radius: 5px;
+    }
+    button {
+      font-size: 20px;
+    }
+  </style>
+
+  <body>
+    <div>
+      <label for="min">Min</label>
+      <input type="text" id="min" />
+    </div>
+    <div>
+      <label for="max">Max</label>
+
+      <input type="text" id="max" />
+    </div>
+    <div>
+      <label for="mul">Mul</label>
+
+      <input type="text" id="mul" />
+    </div>
+    <div>
+      <button onclick="validateInput()">Validate</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  function validateInput() {
+    //+ is a shorthand for converting text type into number type.
+    var min = +document.getElementById("min").value;
+    var max = +document.getElementById("max").value;
+    var mul = +document.getElementById("mul").value;
+
+    var minElement = document.getElementById("min");
+    var maxElement = document.getElementById("max");
+    var mulElement = document.getElementById("mul");
+
+    // Just to be sure that there is no style left in the input boxes of previous validation.
+    removeAllClass(minElement, maxElement, mulElement);
+
+    const remainderofMin = min % mul;
+    const remainderofMax = max % mul;
+
+    if (isNaN(min)) {
+      minElement.classList.add("red");
+    }
+    if (isNaN(max)) {
+      maxElement.classList.add("red");
+    }
+    if (isNaN(mul)) {
+      mulElement.classList.add("red");
+    }
+
+    if (mul == 0) {
+      mulElement.classList.add("red");
+    } else if (remainderofMax == 0 && remainderofMin == 0) {
+      if (min < max && min >= mul && max > mul) {
+        maxElement.classList.add("green");
+        minElement.classList.add("green");
+        mulElement.classList.add("green");
+      } else if (min > max) {
+        // B condition
+        minElement.classList.add("red");
+      } else if (mul > max || mul > min) {
+        // C & D condition
+        mulElement.classList.add("red");
+      }
+    } else if (remainderofMax !== 0 && remainderofMin == 0) {
+      maxElement.classList.add("red");
+    } else if (remainderofMin !== 0 && remainderofMax == 0) {
+      minElement.classList.add("red");
+    } else {
+      mulElement.classList.add("red");
+    }
+  }
+
+  function removeAllClass(minElement, maxElement, mulElement) {
+    maxElement.classList.remove("green");
+    minElement.classList.remove("green");
+    mulElement.classList.remove("green");
+    maxElement.classList.remove("red");
+    minElement.classList.remove("red");
+    mulElement.classList.remove("red");
+  }
+</script>
