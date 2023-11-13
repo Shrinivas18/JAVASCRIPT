@@ -1,0 +1,29 @@
+<!-- Write a JavaScript program to get the current date.
+   Expected Output :
+     mm-dd-yyyy, mm/dd/yyyy or dd-mm-yyyy, dd/mm/yyyy    -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Current Date in given formats.</title>
+</head>
+<body>
+    <h3>Current Date in given formats.</h3>
+    <p>mm-dd-yyyy, mm/dd/yyyy or dd-mm-yyyy, dd/mm/yyyy </p>
+
+</body>
+
+<script>
+    var today=new Date();
+    var date=today.getDate();
+    var month=today.getMonth()+1;
+    var year=today.getFullYear();
+
+    console.log(`${month}-${date}-${year}`);
+    console.log(`${month}/${date}/${year}`);
+    console.log(`${date}-${month}-${year}`);
+    console.log(`${date}/${month}/${year}`);
+</script>
+</html>
